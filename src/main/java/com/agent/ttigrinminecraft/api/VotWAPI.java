@@ -21,7 +21,31 @@ public class VotWAPI {
         this.skillIDs = new ArrayList<>();
     }
 
-    // ... [Previous methods for health, armor, and magicules] ...
+    // Setters for resources
+    public void setHealth(double health) {
+        this.health = health;
+    }
+
+    public void setArmor(double armor) {
+        this.armor = armor;
+    }
+
+    public void setMagicules(double magicules) {
+        this.magicules = magicules;
+    }
+
+    // Getters for resources (in case you need them later)
+    public double getHealth() {
+        return health;
+    }
+
+    public double getArmor() {
+        return armor;
+    }
+
+    public double getMagicules() {
+        return magicules;
+    }
 
     // Skill management methods
     public List<String> getSkillIDs() {
