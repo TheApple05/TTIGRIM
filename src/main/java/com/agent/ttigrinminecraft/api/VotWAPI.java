@@ -1,5 +1,10 @@
 package com.agent.ttigrinminecraft.api;
 
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.ListNBT;
+import net.minecraft.nbt.StringNBT;
+import net.minecraftforge.common.util.Constants;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,5 +69,34 @@ public class VotWAPI {
 
     public boolean hasSkill(String skillID) {
         return skillIDs.contains(skillID);
+    }
+
+    public CompoundNBT toNBT() {
+        CompoundNBT compound = new CompoundNBT();
+        compound.putDouble("health", this.health);
+        compound.putDouble("armor", this.armor);
+        compound.putDouble("magicules", this.magicules);
+
+        // Convert skillIDs to ListNBT
+        ListNBT skillList = new ListNBT();
+        for (String skill : skillIDs) {
+            skillList.add(StringNBT.valueOf(skill));
+        }
+        compound.put("skillIDs", skillList);
+
+        return compound;
+    }
+
+    public void fromNBT(CompoundNBT compound) {
+        this.health = compound.getDouble("health");
+        this.armor = compound.getDouble("armor");
+        this.magicules = compound.getDouble("magicules");
+
+        // Retrieve skillIDs from ListNBT
+        ListNBT skillList = compound.getList("skillIDs", Constants.NBT.TAG_STRING);
+        this.skillIDs.clear();
+        for (int i = 0; i < skillList.size(); i++) {
+            this.skillIDs.add(skillList.getString(i));
+        }
     }
 }
