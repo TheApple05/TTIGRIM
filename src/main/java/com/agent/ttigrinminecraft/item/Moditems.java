@@ -1,3 +1,5 @@
+// THIS IS A FUCKIN MESS PLZ IGNORE IT OR I'LL YELL AND SCREM
+
 package com.agent.ttigrinminecraft.item;
 
 import com.agent.ttigrinminecraft.ThatTimeInMinecraft;
@@ -17,12 +19,24 @@ public class ModItems {
             DeferredRegister.create(ForgeRegistries.ITEMS, ThatTimeInMinecraft.MOD_ID);
 
     public static final RegistryObject<Item> MAGIC_ORE = Items.register("magic_ore",
+            () -> {
+                return new Item(new Item.Properties()
+                        .tab(ItemGroup.TAB_BUILDING_BLOCKS)
+                        .rarity(Rarity.RARE)
+                        .setISTER(() -> MagicOreItemRenderer::new) // If you want a custom renderer
+                        .addInformation((stack, world, tooltip, flag) -> {
+                            tooltip.add_new(new StringTextComponent(TextFormatting.GOLD + "Raw form of Magisteel."));
+                            // Add more lore as needed
+                        }));
+            });
+
+    public static final RegistryObject<Item> MAGIC_ORE = Items.register("magic_ore",
             () -> new Item(new Item.Properties()
-                    .group(ItemGroup.MATERIALS)
+                    .tab(ItemGroup.TAB_BUILDING_BLOCKS)
                     .rarity(Rarity.RARE)
                     .setISTER(() -> MagicOreItemRenderer::new) // If you want a custom renderer
                     .addInformation((stack, world, tooltip, flag) -> {
-                        tooltip.add(new StringTextComponent(TextFormatting.GOLD + "Raw form of Magisteel."));
+                        tooltip.add_new (new StringTextComponent(TextFormatting.GOLD + "Raw form of Magisteel."));
                         // Add more lore as needed
                     })));
 
